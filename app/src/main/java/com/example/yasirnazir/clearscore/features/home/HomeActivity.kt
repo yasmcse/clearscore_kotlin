@@ -62,7 +62,7 @@ class HomeActivity : BaseActivity(), HomePresenter.View {
     }
 
     override fun showError(apiError: ApiError) {
-        showErrorMessage(apiError.message!!)
+        showErrorMessage(apiError.errorMessage!!)
     }
 
     private fun showErrorMessage(message: String) {
