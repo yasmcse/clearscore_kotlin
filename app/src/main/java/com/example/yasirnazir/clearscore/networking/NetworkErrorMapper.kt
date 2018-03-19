@@ -32,10 +32,8 @@ class NetworkErrorMapper {
             } else {
                 return ApiError(throwable.response().code(), null!!)
             }
-        } else return if (throwable is UnknownHostException) {
-            ApiError(1000, NO_CONNECTION_ERROR)
         } else {
-            ApiError(1001, DEFAULT_ERROR_MESSAGE)
+            return ApiError(1001, DEFAULT_ERROR_MESSAGE)
         }
     }
 

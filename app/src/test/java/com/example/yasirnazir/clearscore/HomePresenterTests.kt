@@ -19,15 +19,12 @@ import org.mockito.Mockito.`when`
 /**
  * Created by yasirnazir on 3/18/18.
  */
-
 class HomePresenterTests {
     private val view = mock(HomePresenter.View::class.java)
     private val networkService = mock(NetworkService::class.java)
     private val presenter = HomePresenter(networkService)
-    internal var response1 = Response(CreditReportInfo(514, 0, 700))
-    internal var response2 = Response(CreditReportInfo(250, 0, 700))
-    internal var errorNoConnection = ApiError(1000, NO_CONNECTION_ERROR)
-    internal var httpError = ApiError(10001, DEFAULT_ERROR_MESSAGE)
+    val response1 = Response(CreditReportInfo(514, 0, 700))
+    val someThingWentWrongError = ApiError(1001, DEFAULT_ERROR_MESSAGE)
 
     @Before
     fun setUp() {
@@ -39,35 +36,20 @@ class HomePresenterTests {
 
         `when`(networkService.creditValues).thenReturn(Observable.just(response1))
         presenter.attach(view)
-
         verify(view).showLoading(true)
         verify<HomePresenter.View>(view).showLoading(false)
         verify<HomePresenter.View>(view).displayScore(514, 0, 700)
     }
 
-    @Ignore
     @Test
-    fun requestFailsWhenNoInternetConnection() {
-        `when`(networkService.creditValues).thenReturn(Observable.error(errorNoConnection))
+    fun requestFailsWhenSomethingWentWrong() {
+        `when`(networkService.creditValues).thenReturn(Observable.error(someThingWentWrongError))
         presenter.attach(view)
-
-        verify<HomePresenter.View>(view).showLoading(true)
-        verify<HomePresenter.View>(view).showLoading(false)
-        verify(view).showError(errorNoConnection)
+        verify<HomePresenter.View>(view).showError(someThingWentWrongError);
     }
 
-    @Test
-    fun showErrorWhenHttpException() {
-        `when`(networkService.creditValues).thenReturn(Observable.error(httpError))
-        presenter.attach(view)
-
-        verify<HomePresenter.View>(view).showLoading(true)
-        verify<HomePresenter.View>(view).showLoading(false)
-        verify<HomePresenter.View>(view).showError(httpError)
-    }
 
     companion object {
-        val NO_CONNECTION_ERROR = "No Internet Connection!"
         val DEFAULT_ERROR_MESSAGE = "Something went wrong! Please try again."
     }
 }

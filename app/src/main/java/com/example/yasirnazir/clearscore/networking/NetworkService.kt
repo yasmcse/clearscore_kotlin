@@ -9,7 +9,7 @@ import rx.Observable
  * Created by yasirnazir on 3/14/18.
  */
 
-class NetworkService(private val networkApi: NetworkApi) {
+ class NetworkService(private val networkApi: NetworkApi) {
 
     val creditValues: Observable<Response>
         get() = networkApi.getCreditValues()
