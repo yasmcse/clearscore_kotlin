@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">clearscore</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="responses">responses</string>
+    <string name="progress">progress</string>
+    <string name="out_of">out of\u0020</string>
+    <string name="no_connection">No Connection</string>
+    <string name="something_went_wrong">Something went wrong! Please try again.</string>
+</resources>

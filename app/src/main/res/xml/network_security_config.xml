@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <domain-config>
+        <domain includeSubdomains="true">5lfoiyb0b3.execute-api.us-west-2.amazonaws.com</domain>
+
+    </domain-config>
+</network-security-config>
